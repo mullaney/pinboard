@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const BulletinBoard = db.define('bulletinBoard', {
+const Board = db.define('Board', {
   title: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -9,4 +9,4 @@ const BulletinBoard = db.define('bulletinBoard', {
   }
 })
 
-module.exports = BulletinBoard
+module.exports = Board
