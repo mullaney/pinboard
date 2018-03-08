@@ -8,4 +8,11 @@ router.get('/', (req, res, next) =>
     .catch(next)
 )
 
+// GET /api/boards/:id
+router.get('/:id', (req, res, next) => {
+  Board.findById(req.params.id)
+    .then(board => res.json(board))
+    .catch(next)
+})
+
 module.exports = router
