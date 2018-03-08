@@ -1,5 +1,6 @@
 const User = require('./user')
 const Board = require('./board')
+const Pin = require('./pin')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -16,5 +17,6 @@ const Board = require('./board')
  */
 module.exports = {
   User,
-  Board
+  Board,
+  Pin,
 }
