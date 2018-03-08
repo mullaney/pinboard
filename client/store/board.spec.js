@@ -41,8 +41,8 @@ describe('Board store', () => {
     describe('fetchBoard', () => {
       it('dispatches the GOT_BOARD action', () => {
         const fakeBoard = {title: 'links', id: 1}
-        mockAxios.onGet('/api/board').replyOnce(200, fakeBoard)
-        return store.dispatch(fetchBoard())
+        mockAxios.onGet('/api/boards/1').replyOnce(200, fakeBoard)
+        return store.dispatch(fetchBoard(1))
           .then(() => {
             const actions = store.getActions()
             expect(actions[0].type).to.be.equal('GOT_BOARD')

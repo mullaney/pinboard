@@ -9,9 +9,9 @@ export const gotBoard = board => ({
   board
 })
 
-export const fetchBoard = () =>
+export const fetchBoard = (id) =>
   dispatch =>
-    axios.get('/api/board')
+    axios.get(`/api/boards/${id}`)
       .then(res => res.data)
       .then(board => {
         dispatch(gotBoard(board))
