@@ -2,11 +2,11 @@ import React from 'react'
 
 const Pin = (props) => {
   console.log('props: ', props)
-  const { x, y, z } = props
+  const { xPos, yPos, zPos } = props
   const style = {
-    top: `${y}px`,
-    left: `${x}px`,
-    zIndex: `${z}`,
+    top: `${yPos}px`,
+    left: `${xPos}px`,
+    zIndex: `${zPos}`,
     position: 'absolute',
     color: 'red',
   }
