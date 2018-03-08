@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Board } = require('../db/models')
+const { Board, Pin } = require('../db/models')
 
 // GET /api/boards/
 router.get('/', (req, res, next) =>
@@ -10,7 +10,9 @@ router.get('/', (req, res, next) =>
 
 // GET /api/boards/:id
 router.get('/:id', (req, res, next) => {
-  Board.findById(req.params.id)
+  Board.findById(req.params.id, {
+    include: [{ model: Pin }]
+  })
     .then(board => res.json(board))
     .catch(next)
 })

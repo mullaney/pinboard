@@ -12,6 +12,18 @@
 const db = require('../server/db')
 const {User, Board} = require('../server/db/models')
 
+const randomInt = (min, max) => {
+  return Math.floor(Math.random() * (max - min)) + min
+}
+
+const randomPin = () => {
+  return {
+    xPos: randomInt(75, 600),
+    yPos: randomInt(75, 600),
+    zPos: randomInt(1, 10)
+  }
+}
+
 async function seed () {
   await db.sync({force: true})
   console.log('db synced!')
@@ -28,6 +40,15 @@ async function seed () {
     Board.create({title: 'javascript'}),
     Board.create({title: 'contacts'})
   ])
+
+  boards.forEach(async board => {
+    await Promise.all([
+      board.createPin(randomPin()),
+      board.createPin(randomPin()),
+      board.createPin(randomPin()),
+      board.createPin(randomPin())
+    ])
+  })
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
   // and store the result that the promise resolves to in a variable! This is nice!
   console.log(`seeded ${users.length} users`)
@@ -46,7 +67,9 @@ seed()
   })
   .then(() => {
     console.log('closing db connection')
-    db.close()
+    setTimeout(() => {
+      db.close()
+    }, 1000)
     console.log('db connection closed')
   })
 

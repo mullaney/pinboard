@@ -1,5 +1,5 @@
 import db from '../'
-const Board = db.model('Board')
+const Board = db.model('board')
 import { expect } from 'chai'
 
 describe('Board model', () => {

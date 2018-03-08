@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetchBoard } from '../store'
+import { Pin } from './'
 // import { NavLink } from 'react-router-dom'
 
 export class Board extends Component {
@@ -13,13 +14,18 @@ export class Board extends Component {
 
   render() {
     const { board } = this.props
+    const { pins } = board
 
     return (
       <div id="wrapper">
         <div id="header">
           <h1><img src="/img/pushpin-small.png" alt="push pin" />{board.title}</h1>
         </div>
-        <div id="board-canvas" />
+        <div id="board-canvas">
+          {pins && pins.map(pin => {
+            return <Pin pin={pin} key={`pin-${pin.id}`} />
+          })}
+        </div>
       </div>
     )
   }
