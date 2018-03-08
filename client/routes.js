@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { Login, Signup, UserHome, Boards, Board, Navbar } from './components'
+import { Login, Signup, UserHome, Boards, Board } from './components'
 import { me, fetchBoards } from './store'
 
 /**
@@ -18,7 +18,6 @@ class Routes extends Component {
 
     return (
       <Switch>
-        <Navbar />
         <Route exact path="/boards" component={Boards} />
         <Route exact path="/boards/:id" component={Board} />
         {/* Routes placed here are available to all visitors */}
