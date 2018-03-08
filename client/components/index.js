@@ -6,7 +6,6 @@
 export { default as Navbar } from './Navbar'
 export { default as UserHome } from './UserHome'
 export { default as Boards } from './Boards'
-export { default as BulletinBoard } from './BulletinBoard'
-export { default as Frame } from './Frame'
+export { default as Board } from './Board'
 export { default as Pin } from './Pin'
 export { Login, Signup } from './AuthForm'

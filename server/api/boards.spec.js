@@ -24,4 +24,19 @@ describe('Board routes', () => {
         })
     })
   })
+
+  describe('GET /api/boards/:id', () => {
+    const boards = [{ title: 'Pictures'}]
+
+    beforeEach(() => Board.bulkCreate(boards))
+
+    it('should return all the boards', () => {
+      return request(app)
+        .get('/api/boards/1')
+        .expect(200)
+        .then(res => {
+          expect(res.body.title).to.equal('Pictures')
+        })
+    })
+  })
 })
