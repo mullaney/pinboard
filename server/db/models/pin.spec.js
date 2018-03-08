@@ -1,5 +1,5 @@
 import db from '../'
-const Pin = db.model('Pin')
+const Pin = db.model('pin')
 import { expect } from 'chai'
 
 describe('Pin model', () => {

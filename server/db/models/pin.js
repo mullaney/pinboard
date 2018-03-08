@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Pin = db.define('Pin', {
+const Pin = db.define('pin', {
   xPos: {
     type: Sequelize.INTEGER
   },

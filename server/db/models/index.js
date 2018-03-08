@@ -15,6 +15,10 @@ const Pin = require('./pin')
  * for example, we can say: const {User} = require('../db/models')
  * instead of: const User = require('../db/models/user')
  */
+
+Pin.belongsTo(Board)
+Board.hasMany(Pin)
+
 module.exports = {
   User,
   Board,

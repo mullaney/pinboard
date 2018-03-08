@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 const db = require('../db')
-const Board = db.model('Board')
+const Board = db.model('board')
 const app = require('../index')
 const request = require('supertest')
 
@@ -36,6 +36,7 @@ describe('Board routes', () => {
         .expect(200)
         .then(res => {
           expect(res.body.title).to.equal('Pictures')
+          expect(res.body.pins).to.be.an('array')
         })
     })
   })
