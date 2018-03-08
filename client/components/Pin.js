@@ -1,6 +1,7 @@
 import React from 'react'
 
-const Pin = (props) => {
+export const Pin = (props) => {
+  console.log('props: ', props)
   const { xPos, yPos, zPos } = props.pin
   const style = {
     top: `${yPos}px`,

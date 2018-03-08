@@ -14,7 +14,7 @@ export class Board extends Component {
 
   render() {
     const { board } = this.props
-    const pins = board.pins
+    const { pins } = board
 
     return (
       <div id="wrapper">
