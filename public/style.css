@@ -1,5 +1,10 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: sans-serif;
+  margin: 0;
 }
 
 a {
@@ -18,4 +23,23 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+/* bulletin board */
+
+div#bulletin-board {
+  background-image: url('/img/bulletin-board.jpg');
+  width: 848px;
+  height: 600px;
+  position: relative;
+}
+
+div#frame {
+  padding: 2rem;
+}
+
+/* pins */
+
+i.pin {
+  font-size: 1.5rem;
 }
