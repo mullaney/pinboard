@@ -18,8 +18,8 @@ const randomInt = (min, max) => {
 
 const randomPin = () => {
   return {
-    xPos: randomInt(20, 300),
-    yPos: randomInt(20, 300),
+    xPos: randomInt(75, 600),
+    yPos: randomInt(75, 600),
     zPos: randomInt(1, 10)
   }
 }
