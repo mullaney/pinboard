@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetchBoard } from '../store'
 import { Pin } from './'
-// import { NavLink } from 'react-router-dom'
 
 export class Board extends Component {
   componentDidMount() {
