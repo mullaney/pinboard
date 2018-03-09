@@ -1,7 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export const Pin = (props) => {
-  console.log('props: ', props)
   const { xPos, yPos, zPos } = props.pin
   const style = {
     top: `${yPos}px`,
@@ -16,3 +16,11 @@ export const Pin = (props) => {
 }
 
 export default Pin
+
+Pin.propTypes = {
+  pin: PropTypes.shape({
+    xPos: PropTypes.number,
+    yPos: PropTypes.number,
+    zPos: PropTypes.number
+  })
+}
