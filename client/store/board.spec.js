@@ -53,10 +53,10 @@ describe('Board store', () => {
   })
 
   describe('reducer', () => {
-    const state = []
+    const state = {}
     const board = {id: 1, title: 'pictures'}
 
-    it('should replace the array of board in state with fetched board', () => {
+    it('should replace the board in state with action.board', () => {
       const newState = reducer(state, {
         type: 'GOT_BOARD',
         board
