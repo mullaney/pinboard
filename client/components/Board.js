@@ -12,7 +12,7 @@ export class Board extends Component {
   }
 
   handleMouseDown = (event) => {
-    console.log('board down', event)
+    // console.log('board down', event)
     // this.setState({
     //   ...this.state,
     //   isDragging: true
@@ -20,7 +20,7 @@ export class Board extends Component {
   }
 
   handleMouseUp = (event) => {
-    console.log('board up', event.clientX, event.clientY)
+    // console.log('board up', event.clientX, event.clientY)
     // this.setState({
     //   ...this.state,
     //   isDragging: false

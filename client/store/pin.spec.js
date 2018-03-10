@@ -103,11 +103,15 @@ describe('Pin store', () => {
         type: 'GOT_PIN',
         pin
       })
-      expect(newState).to.be.deep.equal({
-        pin: {
-          xPos: 10, yPos: 2, zPos: 3, boardId: 2
-        }
+      expect(newState).to.be.deep.equal({ xPos: 10, yPos: 2, zPos: 3, boardId: 2 })
+    })
+
+    it('should change the value for isDragging', () => {
+      const newState = reducer(state, {
+        type: 'SET_IS_DRAGGING',
+        isDragging: true
       })
+      expect(newState).to.be.deep.equal({ isDragging: true })
     })
   })
 })

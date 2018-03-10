@@ -1,55 +1,56 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { startDrag, endDrag } from '../store'
 
-export class Pin extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isDragging: false,
-      xDrag: 0,
-      yDrag: 0
-    }
-    // this.handleMouseDown = this.handleMouseDown.bind(this)
-    // this.handleMouseUp = this.handleMouseUp.bind(this)
+export const Pin = (props) => {
+  const { pin, activePin, handleMouseDown, handleMouseUp } = props
+  const { xPos, yPos, zPos } = pin
+
+  const pinStyle = {
+    top: `${yPos}px`,
+    left: `${xPos}px`,
+    zIndex: `${zPos}`,
+    position: 'absolute',
+    backgroundImage: `url('/img/pushpin-small.png')`,
+    height: '40px',
+    width: '40px',
+    cursor: 'move',
   }
 
-  handleMouseDown = (event) => {
-    console.log('pin down', event.target.attributes.value.value)
-    // this.setState({
-    //   ...this.state,
-    //   isDragging: true
-    // })
-  }
+  return (
+    <div
+      className="pushpin"
+      style={pinStyle}
+      draggable="true"
+      onMouseDown={() => {handleMouseDown(pin)}}
+      onMouseUp={() => {handleMouseUp(pin, activePin)}}
+    />
+  )
+}
 
-  handleMouseUp = (event) => {
-    console.log('pin up', event.target.attributes.value.value)
-    // this.setState({
-    //   ...this.state,
-    //   isDragging: false
-    // })
-  }
-
-  render() {
-    const { xPos, yPos, zPos, id } = this.props.pin
-
-    const style = {
-      top: `${yPos}px`,
-      left: `${xPos}px`,
-      zIndex: `${zPos}`,
-      position: 'absolute',
-      backgroundImage: `url('/img/pushpin-small.png')`,
-      height: '40px',
-      width: '40px',
-      cursor: 'move'
-    }
-
-    return (
-      <div style={style} onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp} value={id} />
-    )
+const mapStateToProps = function (state) {
+  return {
+    activePin: state.pin,
+    isDragging: state.pin.isDragging
   }
 }
 
-export default Pin
+const mapDispatch = (dispatch) => {
+  return {
+    handleMouseDown(pin) {
+      dispatch(startDrag(pin))
+    },
+    handleMouseUp(pin, activePin) {
+      if (pin.id === activePin.id) {
+        dispatch(endDrag(pin))
+      }
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatch)(Pin)
+
 
 Pin.propTypes = {
   pin: PropTypes.shape({

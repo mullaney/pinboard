@@ -77,3 +77,11 @@ i.pin {
   font-size: 1.5rem;
   margin: 0;
 }
+
+/* Notes  */
+
+.note {
+  width: 240px;
+  background-color: lightyellow;
+  position: absolute;
+}

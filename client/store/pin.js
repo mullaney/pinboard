@@ -4,10 +4,7 @@ const GOT_PIN = 'GOT_PIN'
 const SET_IS_DRAGGING = 'SET_IS_DRAGGING'
 
 
-const initialState = {
-  isDragging: false,
-  pin: {}
-}
+const initialState = {}
 
 /*
   Action Creators
@@ -55,8 +52,11 @@ export const endDrag = (pin) =>
 export default function (state = initialState, action) {
   switch (action.type) {
 
+    case SET_IS_DRAGGING:
+      return {...state, isDragging: action.isDragging}
+
     case GOT_PIN:
-      return {...state, pin: action.pin }
+      return {...state, ...action.pin }
 
     default:
       return state
