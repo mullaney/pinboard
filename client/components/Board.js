@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { fetchBoard } from '../store'
+import { fetchBoard, endDrag, updatePin } from '../store'
 import { Pin } from './'
 
 export class Board extends Component {
@@ -11,21 +11,9 @@ export class Board extends Component {
     }
   }
 
-  handleMouseDown = (event) => {
-    // console.log('board down', event)
-    // this.setState({
-    //   ...this.state,
-    //   isDragging: true
-    // })
-  }
-
-  handleMouseUp = (event) => {
-    // console.log('board up', event.clientX, event.clientY)
-    // this.setState({
-    //   ...this.state,
-    //   isDragging: false
-    // })
-  }
+  // handleMouseUp(event) {
+  //   console.log('X, Y', event.clientX, event.clientY)
+  // }
 
   render() {
     const { board } = this.props
@@ -36,7 +24,10 @@ export class Board extends Component {
         <div id="header">
           <h1><img src="/img/pushpin-small.png" alt="push pin" />{board.title}</h1>
         </div>
-        <div id="board-canvas" onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>
+        <div
+          id="board-canvas"
+          onMouseDown={() => {console.log('down')}}
+          onMouseUp={this.props.handleMouseUp}>
           {pins && pins.map(pin => {
             return <Pin pin={pin} key={`pin-${pin.id}`} />
           })}
@@ -48,7 +39,9 @@ export class Board extends Component {
 
 const mapState = (state) => {
   return {
-    board: state.board
+    board: state.board,
+    activePin: state.pin,
+    isDragging: state.pin.isDragging
   }
 }
 
@@ -56,6 +49,9 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData(boardId) {
       dispatch(fetchBoard(boardId))
+    },
+    handleMouseUp(event) {
+      console.log('X, Y', event.clientX, event.clientY)
     }
   }
 }
