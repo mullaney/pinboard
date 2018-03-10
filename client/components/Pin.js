@@ -18,14 +18,29 @@ export const Pin = (props) => {
     cursor: 'move',
   }
 
+  const noteStyle = {
+    top: `${yPos + 25}px`,
+    left: `${xPos - 100}px`,
+    zIndex: `${zPos - 1}`,
+    position: 'absolute',
+    backgroundColor: 'lightyellow',
+    padding: '1rem',
+    width: '240px',
+    cursor: 'move',
+    boxShadow: '2px 2px 5px rgba(0, 0, 0, 18)'
+  }
+
   return (
-    <div
-      className="pushpin"
-      style={pinStyle}
-      draggable="true"
-      onMouseDown={() => {handleMouseDown(pin)}}
-      onMouseUp={() => {handleMouseUp(pin, activePin)}}
-    />
+    <div>
+      <div
+        className="pushpin"
+        style={pinStyle}
+        draggable="true"
+        onMouseDown={() => {handleMouseDown(pin)}}
+        onMouseUp={() => {handleMouseUp(pin, activePin)}}
+      />
+      <div style={noteStyle}>Note</div>
+    </div>
   )
 }
 
