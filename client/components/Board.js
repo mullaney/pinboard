@@ -11,9 +11,23 @@ export class Board extends Component {
     }
   }
 
-  // handleMouseUp(event) {
-  //   console.log('X, Y', event.clientX, event.clientY)
-  // }
+  handleMouseDown = (event) => {
+    // console.log('board down', event)
+    // this.setState({
+    //   ...this.state,
+    //   isDragging: true
+    // })
+  }
+
+  handleMouseUp = (event) => {
+    const { activePin, isDragging, movePin } = this.props
+    console.log('activePin Before: ', activePin)
+    if (isDragging) {
+      activePin.xPos = event.clientX
+      activePin.yPos = event.clientY
+      movePin(activePin)
+    }
+  }
 
   render() {
     const { board } = this.props
@@ -26,8 +40,9 @@ export class Board extends Component {
         </div>
         <div
           id="board-canvas"
-          onMouseDown={() => {console.log('down')}}
-          onMouseUp={this.props.handleMouseUp}>
+          onMouseDown={this.handleMouseDown}
+          onDragEnd={this.handleMouseUp}
+        >
           {pins && pins.map(pin => {
             return <Pin pin={pin} key={`pin-${pin.id}`} />
           })}
@@ -50,8 +65,10 @@ const mapDispatch = (dispatch) => {
     loadInitialData(boardId) {
       dispatch(fetchBoard(boardId))
     },
-    handleMouseUp(event) {
-      console.log('X, Y', event.clientX, event.clientY)
+    movePin(activePin) {
+      console.log('activePin After: ', activePin)
+      dispatch(updatePin(activePin))
+      dispatch(endDrag())
     }
   }
 }
