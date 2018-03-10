@@ -11,6 +11,22 @@ export class Board extends Component {
     }
   }
 
+  handleMouseDown = (event) => {
+    console.log('board down', event)
+    // this.setState({
+    //   ...this.state,
+    //   isDragging: true
+    // })
+  }
+
+  handleMouseUp = (event) => {
+    console.log('board up', event.clientX, event.clientY)
+    // this.setState({
+    //   ...this.state,
+    //   isDragging: false
+    // })
+  }
+
   render() {
     const { board } = this.props
     const { pins } = board
@@ -20,7 +36,7 @@ export class Board extends Component {
         <div id="header">
           <h1><img src="/img/pushpin-small.png" alt="push pin" />{board.title}</h1>
         </div>
-        <div id="board-canvas">
+        <div id="board-canvas" onMouseDown={this.handleMouseDown} onMouseUp={this.handleMouseUp}>
           {pins && pins.map(pin => {
             return <Pin pin={pin} key={`pin-${pin.id}`} />
           })}

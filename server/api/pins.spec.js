@@ -38,7 +38,6 @@ describe('Pin routes', () => {
         .send({ xPos: 20 })
         .expect(200)
         .then(res => {
-          console.log('res.body', res.body)
           expect(res.body.xPos).to.equal(20)
         })
     })
