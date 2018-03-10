@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { fetchBoard, endDrag, updatePin } from '../store'
+import { fetchBoard, endDrag, updatePin, updateBoardPin } from '../store'
 import { Pin } from './'
 
 export class Board extends Component {
@@ -12,19 +12,26 @@ export class Board extends Component {
   }
 
   handleMouseDown = (event) => {
-    // console.log('board down', event)
-    // this.setState({
-    //   ...this.state,
-    //   isDragging: true
-    // })
+    return event
   }
 
   handleMouseUp = (event) => {
     const { activePin, isDragging, movePin } = this.props
-    console.log('activePin Before: ', activePin)
+    const borderSize = 20
+    const top = 60
+    const bottom = window.innerHeight - 70
+    const left = 20
+    const right = window.innerWidth - 55
+
     if (isDragging) {
-      activePin.xPos = event.clientX
-      activePin.yPos = event.clientY
+      activePin.xPos = event.clientX - borderSize
+      activePin.xPos = (activePin.xPos < left) ? left : activePin.xPos
+      activePin.xPos = (activePin.xPos > right) ? right : activePin.xPos
+
+      activePin.yPos = event.clientY - borderSize
+      activePin.yPos = (activePin.yPos < top) ? top : activePin.yPos
+      activePin.yPos = (activePin.yPos > bottom) ? bottom : activePin.yPos
+
       movePin(activePin)
     }
   }
@@ -66,8 +73,8 @@ const mapDispatch = (dispatch) => {
       dispatch(fetchBoard(boardId))
     },
     movePin(activePin) {
-      console.log('activePin After: ', activePin)
       dispatch(updatePin(activePin))
+      dispatch(updateBoardPin(activePin))
       dispatch(endDrag())
     }
   }
