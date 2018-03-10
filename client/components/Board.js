@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { fetchBoard, endDrag, updatePin, updateBoardPin } from '../store'
+import { fetchBoard, endDrag, updatePin, updateBoardPin, createNewPin } from '../store'
 import { Pin } from './'
 
 export class Board extends Component {
@@ -37,13 +37,13 @@ export class Board extends Component {
   }
 
   render() {
-    const { board } = this.props
+    const { board, handleCreateNewPin } = this.props
     const { pins } = board
 
     return (
       <div id="wrapper">
         <div id="header">
-          <h1><img src="/img/pushpin-small.png" alt="push pin" />{board.title}</h1>
+          <h1><img onClick={handleCreateNewPin} src="/img/pushpin-small.png" alt="push pin" />{board.title}</h1>
         </div>
         <div
           id="board-canvas"
@@ -76,6 +76,10 @@ const mapDispatch = (dispatch) => {
       dispatch(updatePin(activePin))
       dispatch(updateBoardPin(activePin))
       dispatch(endDrag())
+    },
+    handleCreateNewPin() {
+      const newPin = { xPos: 100, yPos: 100, zPos: 1 }
+      dispatch(createNewPin(newPin))
     }
   }
 }
