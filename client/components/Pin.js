@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { startDrag, endDrag, startEditMode, deletedPin } from '../store'
+import { startDrag, endDrag, startEditMode } from '../store'
 import { markdown } from 'markdown'
 import { EditNote } from './'
 
@@ -32,21 +32,6 @@ export const Pin = (props) => {
     boxShadow: '1px 1px 3px rgba(0, 0, 0, 18)'
   }
 
-  const deleteStyle = {
-    top: `${yPos + 18}px`,
-    left: `${xPos + 128}px`,
-    zIndex: `${zPos + 1}`,
-    position: 'absolute',
-    backgroundColor: 'orangered',
-    color: 'white',
-    height: '24px',
-    width: '24px',
-    border: '1px solid white',
-    borderRadius: '50%',
-    textAlign: 'center',
-    visibility: 'visible',
-  }
-
   return (
     <div className="">
       <div
@@ -61,7 +46,7 @@ export const Pin = (props) => {
           <div
             onClick={() => {handleStartEdit(pin)}}
             style={noteStyle}
-            dangerouslySetInnerHTML={createMarkup(note)}
+            dangerouslySetInnerHTML={createMarkup(note)} // eslint-disable-line
           />
         )
       }

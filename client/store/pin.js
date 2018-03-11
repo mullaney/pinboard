@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { deleteBoardPin } from './index'
 
 const GOT_PIN = 'GOT_PIN'
 const SET_IS_DRAGGING = 'SET_IS_DRAGGING'
