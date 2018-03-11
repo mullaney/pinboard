@@ -21,6 +21,10 @@ nav a {
   margin: 1em;
 }
 
+p {
+  margin: 0;
+}
+
 form div {
   margin: 1em;
   display: inline-block;

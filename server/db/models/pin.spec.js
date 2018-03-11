@@ -13,5 +13,8 @@ describe('Pin model', () => {
     it('should have a zPos', () => {
       expect(Pin.attributes.zPos).to.be.an('object')
     })
+    it('should have a note', () => {
+      expect(Pin.attributes.note).to.be.an('object')
+    })
   })
 })

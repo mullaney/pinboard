@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { startDrag, endDrag } from '../store'
+import { markdown } from 'markdown'
 
 export const Pin = (props) => {
-  const { pin, activePin, handleMouseDown, handleMouseUp } = props
-  const { xPos, yPos, zPos } = pin
+  const { pin, activePin, handleMouseDown, handleMouseUp, createMarkup } = props
+  const { xPos, yPos, zPos, note } = pin
 
   const pinStyle = {
     top: `${yPos}px`,
@@ -39,7 +40,7 @@ export const Pin = (props) => {
         onMouseDown={() => {handleMouseDown(pin)}}
         onMouseUp={() => {handleMouseUp(pin, activePin)}}
       />
-      <div style={noteStyle}>Note</div>
+      <div style={noteStyle} dangerouslySetInnerHTML={createMarkup(note)} />
     </div>
   )
 }
@@ -60,6 +61,9 @@ const mapDispatch = (dispatch) => {
       if (pin.id === activePin.id) {
         dispatch(endDrag(pin))
       }
+    },
+    createMarkup(note) {
+      return {__html: markdown.toHTML(note)}
     }
   }
 }
