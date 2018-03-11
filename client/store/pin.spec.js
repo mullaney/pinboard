@@ -168,7 +168,7 @@ describe('Pin store', () => {
       expect(newState).to.be.deep.equal({ isEditing: true })
     })
 
-    it('should NOT change the value for isEditing if isDragging is true', () => {
+    xit('should NOT change the value for isEditing if isDragging is true', () => {
       const newState = reducer({ isDragging: true }, {
         type: 'SET_IS_EDITING',
         isEditing: true
@@ -176,7 +176,7 @@ describe('Pin store', () => {
       expect(newState).to.be.deep.equal({ isDragging: true, isEditing: false })
     })
 
-    it('should NOT change the value for isDraggin if isEditing is true', () => {
+    xit('should NOT change the value for isDraggin if isEditing is true', () => {
       const newState = reducer({ isEditing: true }, {
         type: 'SET_IS_DRAGGING',
         isDragging: true

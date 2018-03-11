@@ -57,8 +57,9 @@ export const startEditMode = (pin) =>
 
 export const endEditMode = (pin) =>
   dispatch => {
-    dispatch(updatePin(pin))
     dispatch(setIsEditing(false))
+    dispatch(updatePin(pin))
+      .catch()
   }
 
 
@@ -70,10 +71,10 @@ export default function (state = initialState, action) {
   switch (action.type) {
 
     case SET_IS_DRAGGING:
-      return {...state, isDragging: action.isDragging && !state.isEditing}
+      return {...state, isDragging: action.isDragging}
 
     case SET_IS_EDITING:
-      return {...state, isEditing: action.isEditing && !state.isDragging}
+      return {...state, isEditing: action.isEditing}
 
     case GOT_PIN:
       return {...state, ...action.pin }
