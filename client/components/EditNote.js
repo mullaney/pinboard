@@ -30,7 +30,7 @@ const mapDispatch = (dispatch) => {
         pin.note = newNote
         dispatch(updateBoardPin(pin))
         dispatch(endEditMode(pin))
-      } else if (confirm('You are about to delete this note. Please click OK to confirm')) { //eslint-disable-line
+      } else {
         dispatch(endEditMode(pin))
         dispatch(deleteBoardPin(pin))
       }

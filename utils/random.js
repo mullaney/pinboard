@@ -13,7 +13,6 @@ const randomNotes = [
 const randomColors = [
   'lightyellow',
   'lightcyan',
-  'lightpink',
   'lightsteelblue',
   'lightgray',
   'mistyrose',
