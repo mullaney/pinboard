@@ -16,11 +16,23 @@ const randomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min
 }
 
+const randomNotes = [
+  'Some simple text',
+  '# Markdown\n- [ ] Checkbox',
+  '[I\'m an inline-style link](https://www.google.com)',
+  '![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")'
+]
+
+const randomNote = () => {
+  return randomNotes[Math.floor(Math.random() * randomNotes.length)]
+}
+
 const randomPin = () => {
   return {
     xPos: randomInt(75, 600),
     yPos: randomInt(75, 600),
-    zPos: randomInt(1, 10)
+    zPos: randomInt(1, 10),
+    note: randomNote()
   }
 }
 

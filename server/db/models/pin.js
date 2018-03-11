@@ -11,6 +11,10 @@ const Pin = db.define('pin', {
   zPos: {
     type: Sequelize.INTEGER
   },
+  note: {
+    type: Sequelize.TEXT,
+    defaultValue: 'A new note'
+  }
 })
 
 module.exports = Pin
