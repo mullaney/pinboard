@@ -36,6 +36,7 @@ export const updatePin = (pin) =>
       .then(updatedPin => {
         dispatch(gotPin(updatedPin))
       })
+      .catch(e => console.error(e))
 
 export const startDrag = (pin) =>
   dispatch => {
@@ -59,7 +60,6 @@ export const endEditMode = (pin) =>
   dispatch => {
     dispatch(setIsEditing(false))
     dispatch(updatePin(pin))
-      .catch()
   }
 
 

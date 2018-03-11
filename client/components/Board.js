@@ -92,7 +92,7 @@ const mapDispatch = (dispatch) => {
       dispatch(endDrag())
     },
     handleCreateNewPin(boardId, zPos) {
-      const newPin = { xPos: 130, yPos: 68, zPos, boardId, isEditing: true, note: '' }
+      const newPin = { xPos: 130, yPos: 68, zPos, boardId }
       dispatch(createNewPin(newPin))
     }
   }
