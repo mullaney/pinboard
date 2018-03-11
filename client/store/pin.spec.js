@@ -129,7 +129,7 @@ describe('Pin store', () => {
 
     describe('endEditMode', () => {
       it('dispatches two actions, GOT_PIN and SET_IS_EDITING', () => {
-        const pin = { xPos: 10, yPos: 2, zPos: 3, boardId: 2, id: 1 }
+        const pin = { xPos: 10, yPos: 2, zPos: 3, boardId: 2 }
 
         store.dispatch(endEditMode(pin))
         const actions = store.getActions()
