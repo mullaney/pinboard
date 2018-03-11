@@ -36,7 +36,7 @@ export const updatePin = (pin) =>
       .then(updatedPin => {
         dispatch(gotPin(updatedPin))
       })
-      .catch(e => console.error(e))
+      .catch(err => console.error(err))
 
 export const startDrag = (pin) =>
   dispatch => {

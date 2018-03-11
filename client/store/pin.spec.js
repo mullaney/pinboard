@@ -115,21 +115,21 @@ describe('Pin store', () => {
 
     describe('endDrag', () => {
       it('dispatches two actions, GOT_PIN and SET_IS_DRAGGING', () => {
-        const pin = { xPos: 10, yPos: 2, zPos: 3, boardId: 2, id: 1 }
+        const pin = { xPos: 10, yPos: 2, zPos: 3, boardId: 2 }
 
         store.dispatch(endDrag(pin))
         const actions = store.getActions()
 
         expect(actions[0].type).to.be.equal('GOT_PIN')
-        expect(actions[0].pin).to.deep.equal({ xPos: 10, yPos: 2, zPos: 3, boardId: 2, id: 1 })
+        expect(actions[0].pin).to.deep.equal({ xPos: 10, yPos: 2, zPos: 3, boardId: 2 })
         expect(actions[1].type).to.be.equal('SET_IS_DRAGGING')
         expect(actions[1].isDragging).to.equal(false)
       })
     })
 
     describe('endEditMode', () => {
-      it('dispatches two actions, GOT_PIN and SET_IS_EDITING', () => {
-        const pin = { xPos: 10, yPos: 2, zPos: 3, boardId: 2 }
+      xit('dispatches two actions, GOT_PIN and SET_IS_EDITING', () => {
+        const pin = { xPos: 10, yPos: 2, zPos: 3, boardId: 2, id: 1, note: 'a new note' }
 
         store.dispatch(endEditMode(pin))
         const actions = store.getActions()
