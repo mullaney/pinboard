@@ -20,6 +20,7 @@ export class Board extends Component {
       return max > pin.zPos ? max : pin.zPos
     }, 0)
 
+
     const borderSize = 20
     const top = 68
     const bottom = window.innerHeight - 106
@@ -49,9 +50,9 @@ export class Board extends Component {
 
     const { pins } = board
 
-    const highestZ = pins.reduce((max, pin) => {
+    const highestZ = pins ? pins.reduce((max, pin) => {
       return max > pin.zPos ? max : pin.zPos
-    }, 0)
+    }, 0) : 0
 
     return (
       <div id="wrapper">
