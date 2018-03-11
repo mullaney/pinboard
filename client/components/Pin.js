@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { startDrag, endDrag } from '../store'
+import { startDrag, endDrag, startEditMode } from '../store'
 import { markdown } from 'markdown'
+import { EditNote } from './'
 
 export const Pin = (props) => {
-  const { pin, activePin, handleMouseDown, handleMouseUp, createMarkup } = props
+  const { pin, activePin, handleMouseDown, handleMouseUp, createMarkup, handleStartEdit, isEditing } = props
   const { xPos, yPos, zPos, note, noteColor } = pin
 
   const pinStyle = {
@@ -40,7 +41,16 @@ export const Pin = (props) => {
         onMouseDown={() => {handleMouseDown(pin)}}
         onMouseUp={() => {handleMouseUp(pin, activePin)}}
       />
-      <div style={noteStyle} dangerouslySetInnerHTML={createMarkup(note)} />
+      {
+        activePin.id === pin.id && isEditing ? <EditNote note={note} noteStyle={noteStyle} /> : (
+          <div
+            onClick={() => {handleStartEdit(pin)}}
+            style={noteStyle}
+            dangerouslySetInnerHTML={createMarkup(note)}
+          />
+        )
+      }
+
     </div>
   )
 }
@@ -48,7 +58,8 @@ export const Pin = (props) => {
 const mapStateToProps = function (state) {
   return {
     activePin: state.pin,
-    isDragging: state.pin.isDragging
+    isDragging: state.pin.isDragging,
+    isEditing: state.pin.isEditing
   }
 }
 
@@ -64,6 +75,9 @@ const mapDispatch = (dispatch) => {
     },
     createMarkup(note) {
       return {__html: markdown.toHTML(note)}
+    },
+    handleStartEdit(pin) {
+      dispatch(startEditMode(pin))
     }
   }
 }

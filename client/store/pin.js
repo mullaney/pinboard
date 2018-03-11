@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const GOT_PIN = 'GOT_PIN'
 const SET_IS_DRAGGING = 'SET_IS_DRAGGING'
-
+const SET_IS_EDITING = 'SET_IS_EDITING'
 
 const initialState = {}
 
@@ -20,6 +20,11 @@ const initialState = {}
    isDragging
  })
 
+ export const setIsEditing = isEditing => ({
+   type: SET_IS_EDITING,
+   isEditing
+ })
+
 /*
   Thunks
   */
@@ -31,6 +36,7 @@ export const updatePin = (pin) =>
       .then(updatedPin => {
         dispatch(gotPin(updatedPin))
       })
+      .catch(e => console.error(e))
 
 export const startDrag = (pin) =>
   dispatch => {
@@ -44,6 +50,18 @@ export const endDrag = (pin) =>
     dispatch(setIsDragging(false))
   }
 
+export const startEditMode = (pin) =>
+  dispatch => {
+    dispatch(gotPin(pin))
+    dispatch(setIsEditing(true))
+  }
+
+export const endEditMode = (pin) =>
+  dispatch => {
+    dispatch(setIsEditing(false))
+    dispatch(updatePin(pin))
+  }
+
 
 /*
   Reducer
@@ -54,6 +72,9 @@ export default function (state = initialState, action) {
 
     case SET_IS_DRAGGING:
       return {...state, isDragging: action.isDragging}
+
+    case SET_IS_EDITING:
+      return {...state, isEditing: action.isEditing}
 
     case GOT_PIN:
       return {...state, ...action.pin }
