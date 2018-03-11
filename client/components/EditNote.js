@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { endEditMode, updateBoardPin } from '../store'
+import { endEditMode, updateBoardPin, deleteBoardPin } from '../store'
 
 const EditNote = (props) => {
   const { activePin, handleBlur, note, noteStyle } = props
@@ -25,9 +25,15 @@ const mapStateToProps = function (state) {
 const mapDispatch = (dispatch) => {
   return {
     handleBlur(event, pin) {
-      pin.note = event.target.value
-      dispatch(updateBoardPin(pin))
-      dispatch(endEditMode(pin))
+      const newNote = event.target.value
+      if (newNote !== '') {
+        pin.note = newNote
+        dispatch(updateBoardPin(pin))
+        dispatch(endEditMode(pin))
+      } else if (confirm('You are about to delete this note. Please click OK to confirm')) { //eslint-disable-line
+        dispatch(endEditMode(pin))
+        dispatch(deleteBoardPin(pin))
+      }
     }
   }
 }

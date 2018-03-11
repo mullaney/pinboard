@@ -7,7 +7,8 @@ import reducer, {
   endDrag,
   setIsEditing,
   startEditMode,
-  endEditMode
+  endEditMode,
+  pinDeleted,
 } from './pin'
 
 import { expect } from 'chai'
@@ -50,6 +51,12 @@ describe('Pin store', () => {
       action = setIsEditing(false)
       expect(action.type).to.be.equal('SET_IS_EDITING')
       expect(action.isEditing).to.deep.equal(false)
+    })
+
+    it('pinDeleted should return correct action type and pin', () => {
+      action = pinDeleted(pin)
+      expect(action.type).to.be.equal('PIN_DELETED')
+      expect(action.pin).to.deep.equal(pin)
     })
   })
 
@@ -183,5 +190,9 @@ describe('Pin store', () => {
       })
       expect(newState).to.be.deep.equal({ isDragging: false, isEditing: true })
     })
+
+    // it('pinDeleted should remove the correct pin from the state', () => {
+    //   state =
+    // })
   })
 })

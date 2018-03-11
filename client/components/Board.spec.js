@@ -16,6 +16,6 @@ describe('<Board />', () => {
   })
 
   it('should render the board title as an h1', () => {
-    expect(board.find('h1').text()).to.equal('pictures')
+    expect(board.find('.title').text()).to.equal('pictures')
   })
 })

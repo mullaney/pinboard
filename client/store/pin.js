@@ -1,8 +1,10 @@
 import axios from 'axios'
+import { deleteBoardPin } from './index'
 
 const GOT_PIN = 'GOT_PIN'
 const SET_IS_DRAGGING = 'SET_IS_DRAGGING'
 const SET_IS_EDITING = 'SET_IS_EDITING'
+const PIN_DELETED = 'PIN_DELETED'
 
 const initialState = {}
 
@@ -10,20 +12,27 @@ const initialState = {}
   Action Creators
   */
 
- export const gotPin = pin => ({
-   type: GOT_PIN,
-   pin
- })
+export const gotPin = pin => ({
+  type: GOT_PIN,
+  pin
+})
 
- export const setIsDragging = isDragging => ({
-   type: SET_IS_DRAGGING,
-   isDragging
- })
+export const setIsDragging = isDragging => ({
+  type: SET_IS_DRAGGING,
+  isDragging
+})
 
- export const setIsEditing = isEditing => ({
-   type: SET_IS_EDITING,
-   isEditing
- })
+export const setIsEditing = isEditing => ({
+  type: SET_IS_EDITING,
+  isEditing
+})
+
+export const pinDeleted = pin => {
+  return {
+    type: PIN_DELETED,
+    pin
+  }
+}
 
 /*
   Thunks
@@ -61,7 +70,6 @@ export const endEditMode = (pin) =>
     dispatch(setIsEditing(false))
     dispatch(updatePin(pin))
   }
-
 
 /*
   Reducer
