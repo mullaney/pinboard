@@ -3,6 +3,7 @@ import axios from 'axios'
 const GOT_BOARD = 'GOT_BOARD'
 const UPDATE_BOARD_PIN = 'UPDATE_BOARD_PIN'
 const NEW_BOARD_PIN = 'NEW_BOARD_PIN'
+const DELETE_PIN = 'DELETE_PIN'
 
 const initialState = {
   pins: []
@@ -27,6 +28,11 @@ export const newBoardPin = pin => ({
   pin
 })
 
+export const deletedPin = pin => ({
+  type: DELETE_PIN,
+  pin
+})
+
 /*
   Thunks
   */
@@ -47,6 +53,13 @@ export const createNewPin = (pin) =>
         dispatch(newBoardPin(newPin))
       })
 
+export const deleteBoardPin = (pin) =>
+  dispatch =>
+    axios.delete(`/api/pins/${pin.id}`)
+      .then(() => {
+        dispatch(deletedPin(pin))
+      })
+
 /*
   Reducer
   */
@@ -55,6 +68,9 @@ export default function (state = initialState, action) {
   let pins = state.pins
 
   switch (action.type) {
+
+    case DELETE_PIN:
+      return {...state, pins: pins.filter(pin => pin.id !== action.pin.id)}
 
     case NEW_BOARD_PIN:
       return {...state, pins: [...pins, action.pin]}

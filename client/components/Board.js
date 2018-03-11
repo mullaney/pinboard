@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetchBoard, endDrag, updatePin, updateBoardPin, createNewPin } from '../store'
 import { Pin } from './'
+import { randomColor } from '../../utils/random'
+import { NavLink } from 'react-router-dom'
 
 export class Board extends Component {
   componentDidMount() {
@@ -22,7 +24,7 @@ export class Board extends Component {
 
 
     const borderSize = 20
-    const top = 68
+    const top = 55
     const bottom = window.innerHeight - 106
     const left = 130
     const right = window.innerWidth - 168
@@ -57,7 +59,15 @@ export class Board extends Component {
     return (
       <div id="wrapper">
         <div id="header">
-          <h1><img onClick={() => {handleCreateNewPin(boardId, highestZ + 2)}} src="/img/pushpin-small.png" alt="push pin" />{board.title}</h1>
+          <h1 className="board-name">
+            <img onClick={() => {handleCreateNewPin(boardId, highestZ + 2)}} src="/img/pushpin-small.png" alt="push pin" />
+            <span>
+              <NavLink to="/boards">
+                <i className="fas fa-arrow-left" />
+              </NavLink>
+            </span>
+            <span className="title">{board.title}</span>
+          </h1>
         </div>
         <div
           id="board-canvas"
@@ -92,7 +102,7 @@ const mapDispatch = (dispatch) => {
       dispatch(endDrag())
     },
     handleCreateNewPin(boardId, zPos) {
-      const newPin = { xPos: 130, yPos: 68, zPos, boardId }
+      const newPin = { xPos: 130, yPos: 55, zPos, boardId, noteColor: randomColor() }
       dispatch(createNewPin(newPin))
     }
   }

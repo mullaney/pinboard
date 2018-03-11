@@ -33,7 +33,7 @@ export const Pin = (props) => {
   }
 
   return (
-    <div>
+    <div className="">
       <div
         className="pushpin"
         style={pinStyle}
@@ -46,7 +46,7 @@ export const Pin = (props) => {
           <div
             onClick={() => {handleStartEdit(pin)}}
             style={noteStyle}
-            dangerouslySetInnerHTML={createMarkup(note)}
+            dangerouslySetInnerHTML={createMarkup(note)} // eslint-disable-line
           />
         )
       }

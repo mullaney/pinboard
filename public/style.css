@@ -68,6 +68,7 @@ i.pin {
   background: #d7b290;
   flex: 0 1 auto;
   padding: 1rem 1rem 0 1rem;
+  align-items: top;
 }
 
 #board-canvas {
@@ -100,5 +101,18 @@ h1, h2, h3, h4, h5, h6 {
 
 ul {
   margin: 0.5rem 0;
+}
+
+h1.board-name span {
+  margin-left: 1rem;
+}
+
+h1.board-name a {
+  color: black;
+}
+
+h1.board-name img {
+  height: 1.8rem;
+  width: 1.8rem;
 }
 

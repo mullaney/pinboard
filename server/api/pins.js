@@ -18,5 +18,15 @@ router.put('/:id', (req, res, next) => {
   .catch(next)
 })
 
+// DELETE /api/pins/:id
+router.delete('/:id', (req, res, next) => {
+  Pin.findById(req.params.id)
+  .then(pin => {
+    return pin.destroy()
+  })
+  .then(data => res.json(data))
+  .catch(next)
+})
+
 
 module.exports = router
