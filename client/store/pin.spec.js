@@ -1,5 +1,15 @@
 // import { gotBoard, fetchBoard } from './board'
-import reducer, { gotPin, updatePin, setIsDragging, startDrag, endDrag } from './pin'
+import reducer, {
+  gotPin,
+  updatePin,
+  setIsDragging,
+  startDrag,
+  endDrag,
+  setIsEditing,
+  startEditMode,
+  endEditMode
+} from './pin'
+
 import { expect } from 'chai'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
@@ -30,6 +40,16 @@ describe('Pin store', () => {
       action = setIsDragging(false)
       expect(action.type).to.be.equal('SET_IS_DRAGGING')
       expect(action.isDragging).to.deep.equal(false)
+    })
+
+    it('setIsEditing should return correct action type and value for isEditing', () => {
+      action = setIsEditing(true)
+      expect(action.type).to.be.equal('SET_IS_EDITING')
+      expect(action.isEditing).to.deep.equal(true)
+
+      action = setIsEditing(false)
+      expect(action.type).to.be.equal('SET_IS_EDITING')
+      expect(action.isEditing).to.deep.equal(false)
     })
   })
 
@@ -79,6 +99,20 @@ describe('Pin store', () => {
       })
     })
 
+    describe('startEditMode', () => {
+      it('dispatches two actions, GOT_PIN and SET_IS_EDITING', () => {
+        const pin = { xPos: 10, yPos: 2, zPos: 3, boardId: 2, id: 1 }
+
+        store.dispatch(startEditMode(pin))
+        const actions = store.getActions()
+
+        expect(actions[0].type).to.be.equal('GOT_PIN')
+        expect(actions[0].pin).to.deep.equal({ xPos: 10, yPos: 2, zPos: 3, boardId: 2, id: 1 })
+        expect(actions[1].type).to.be.equal('SET_IS_EDITING')
+        expect(actions[1].isEditing).to.equal(true)
+      })
+    })
+
     describe('endDrag', () => {
       it('dispatches two actions, GOT_PIN and SET_IS_DRAGGING', () => {
         const pin = { xPos: 10, yPos: 2, zPos: 3, boardId: 2, id: 1 }
@@ -90,6 +124,18 @@ describe('Pin store', () => {
         expect(actions[0].pin).to.deep.equal({ xPos: 10, yPos: 2, zPos: 3, boardId: 2, id: 1 })
         expect(actions[1].type).to.be.equal('SET_IS_DRAGGING')
         expect(actions[1].isDragging).to.equal(false)
+      })
+    })
+
+    describe('endEditMode', () => {
+      it('dispatches two actions, GOT_PIN and SET_IS_EDITING', () => {
+        const pin = { xPos: 10, yPos: 2, zPos: 3, boardId: 2, id: 1 }
+
+        store.dispatch(endEditMode(pin))
+        const actions = store.getActions()
+
+        expect(actions[0].type).to.be.equal('SET_IS_EDITING')
+        expect(actions[0].isEditing).to.equal(false)
       })
     })
   })
@@ -112,6 +158,30 @@ describe('Pin store', () => {
         isDragging: true
       })
       expect(newState).to.be.deep.equal({ isDragging: true })
+    })
+
+    it('should change the value for isEditing', () => {
+      const newState = reducer(state, {
+        type: 'SET_IS_EDITING',
+        isEditing: true
+      })
+      expect(newState).to.be.deep.equal({ isEditing: true })
+    })
+
+    it('should NOT change the value for isEditing if isDragging is true', () => {
+      const newState = reducer({ isDragging: true }, {
+        type: 'SET_IS_EDITING',
+        isEditing: true
+      })
+      expect(newState).to.be.deep.equal({ isDragging: true, isEditing: false })
+    })
+
+    it('should NOT change the value for isDraggin if isEditing is true', () => {
+      const newState = reducer({ isEditing: true }, {
+        type: 'SET_IS_DRAGGING',
+        isDragging: true
+      })
+      expect(newState).to.be.deep.equal({ isDragging: false, isEditing: true })
     })
   })
 })

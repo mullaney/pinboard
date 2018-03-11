@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const GOT_PIN = 'GOT_PIN'
 const SET_IS_DRAGGING = 'SET_IS_DRAGGING'
-
+const SET_IS_EDITING = 'SET_IS_EDITING'
 
 const initialState = {}
 
@@ -18,6 +18,11 @@ const initialState = {}
  export const setIsDragging = isDragging => ({
    type: SET_IS_DRAGGING,
    isDragging
+ })
+
+ export const setIsEditing = isEditing => ({
+   type: SET_IS_EDITING,
+   isEditing
  })
 
 /*
@@ -44,6 +49,18 @@ export const endDrag = (pin) =>
     dispatch(setIsDragging(false))
   }
 
+export const startEditMode = (pin) =>
+  dispatch => {
+    dispatch(gotPin(pin))
+    dispatch(setIsEditing(true))
+  }
+
+export const endEditMode = (pin) =>
+  dispatch => {
+    dispatch(updatePin(pin))
+    dispatch(setIsEditing(false))
+  }
+
 
 /*
   Reducer
@@ -53,7 +70,10 @@ export default function (state = initialState, action) {
   switch (action.type) {
 
     case SET_IS_DRAGGING:
-      return {...state, isDragging: action.isDragging}
+      return {...state, isDragging: action.isDragging && !state.isEditing}
+
+    case SET_IS_EDITING:
+      return {...state, isEditing: action.isEditing && !state.isDragging}
 
     case GOT_PIN:
       return {...state, ...action.pin }
