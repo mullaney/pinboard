@@ -89,3 +89,7 @@ i.pin {
   background-color: lightyellow;
   position: absolute;
 }
+
+img {
+  max-width: calc(240px - 2rem);
+}

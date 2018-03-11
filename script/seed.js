@@ -20,19 +20,28 @@ const randomNotes = [
   'Some simple text',
   '# Markdown\n- [ ] Checkbox',
   '[I\'m an inline-style link](https://www.google.com)',
-  '![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")'
+  '![alt text](https://picsum.photos/300/300/ "Logo Title Text 1")'
+]
+
+const randomColors = [
+  'lightyellow', 'lightcyan', 'lightpink', 'lightsteelblue', 'lightgray', 'mistyrose', 'palegreen'
 ]
 
 const randomNote = () => {
   return randomNotes[Math.floor(Math.random() * randomNotes.length)]
 }
 
+const randomColor = () => {
+  return randomColors[Math.floor(Math.random() * randomColors.length)]
+}
+
 const randomPin = () => {
   return {
-    xPos: randomInt(75, 600),
-    yPos: randomInt(75, 600),
-    zPos: randomInt(1, 10),
-    note: randomNote()
+    xPos: randomInt(150, 600),
+    yPos: randomInt(150, 600),
+    zPos: randomInt(1, 15),
+    note: randomNote(),
+    noteColor: randomColor()
   }
 }
 

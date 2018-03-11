@@ -16,5 +16,7 @@ describe('Pin model', () => {
     it('should have a note', () => {
       expect(Pin.attributes.note).to.be.an('object')
     })
-  })
+    it('should have a noteColor', () => {
+      expect(Pin.attributes.noteColor).to.be.an('object')
+    })  })
 })

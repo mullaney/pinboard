@@ -14,6 +14,10 @@ const Pin = db.define('pin', {
   note: {
     type: Sequelize.TEXT,
     defaultValue: 'A new note'
+  },
+  noteColor: {
+    type: Sequelize.TEXT,
+    defaultValue: 'lightyellow'
   }
 })
 
