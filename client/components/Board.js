@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetchBoard, endDrag, updatePin, updateBoardPin, createNewPin } from '../store'
 import { Pin } from './'
+import { randomColor } from '../../utils/random'
 
 export class Board extends Component {
   componentDidMount() {
@@ -92,7 +93,7 @@ const mapDispatch = (dispatch) => {
       dispatch(endDrag())
     },
     handleCreateNewPin(boardId, zPos) {
-      const newPin = { xPos: 130, yPos: 68, zPos, boardId }
+      const newPin = { xPos: 130, yPos: 68, zPos, boardId, noteColor: randomColor() }
       dispatch(createNewPin(newPin))
     }
   }
