@@ -6,7 +6,7 @@ import { markdown } from 'markdown'
 
 export const Pin = (props) => {
   const { pin, activePin, handleMouseDown, handleMouseUp, createMarkup } = props
-  const { xPos, yPos, zPos, note } = pin
+  const { xPos, yPos, zPos, note, noteColor } = pin
 
   const pinStyle = {
     top: `${yPos}px`,
@@ -24,7 +24,7 @@ export const Pin = (props) => {
     left: `${xPos - 100}px`,
     zIndex: `${zPos - 1}`,
     position: 'absolute',
-    backgroundColor: 'lightyellow',
+    backgroundColor: `${noteColor}`,
     padding: '1rem',
     width: '240px',
     cursor: 'edit',
