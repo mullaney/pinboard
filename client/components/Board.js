@@ -16,12 +16,15 @@ export class Board extends Component {
   }
 
   handleMouseUp = (event) => {
+    const highestZ = this.props.board.pins.reduce((max, pin) => {
+      return max > pin.zPos ? max : pin.zPos
+    }, 0)
 
     const borderSize = 20
-    const top = 60
-    const bottom = window.innerHeight - 70
-    const left = 20
-    const right = window.innerWidth - 55
+    const top = 68
+    const bottom = window.innerHeight - 106
+    const left = 130
+    const right = window.innerWidth - 168
 
     const { activePin, isDragging, movePin } = this.props
 
@@ -34,6 +37,8 @@ export class Board extends Component {
       activePin.yPos = (activePin.yPos < top) ? top : activePin.yPos
       activePin.yPos = (activePin.yPos > bottom) ? bottom : activePin.yPos
 
+      activePin.zPos = highestZ + 2
+
       movePin(activePin)
     }
   }
@@ -44,10 +49,14 @@ export class Board extends Component {
 
     const { pins } = board
 
+    const highestZ = pins.reduce((max, pin) => {
+      return max > pin.zPos ? max : pin.zPos
+    }, 0)
+
     return (
       <div id="wrapper">
         <div id="header">
-          <h1><img onClick={() => {handleCreateNewPin(boardId)}} src="/img/pushpin-small.png" alt="push pin" />{board.title}</h1>
+          <h1><img onClick={() => {handleCreateNewPin(boardId, highestZ + 2)}} src="/img/pushpin-small.png" alt="push pin" />{board.title}</h1>
         </div>
         <div
           id="board-canvas"
@@ -81,8 +90,8 @@ const mapDispatch = (dispatch) => {
       dispatch(updateBoardPin(activePin))
       dispatch(endDrag())
     },
-    handleCreateNewPin(boardId) {
-      const newPin = { xPos: 0, yPos: 60, zPos: 1, boardId }
+    handleCreateNewPin(boardId, zPos) {
+      const newPin = { xPos: 0, yPos: 60, zPos, boardId }
       dispatch(createNewPin(newPin))
     }
   }

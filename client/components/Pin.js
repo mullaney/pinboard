@@ -26,8 +26,8 @@ export const Pin = (props) => {
     backgroundColor: 'lightyellow',
     padding: '1rem',
     width: '240px',
-    cursor: 'move',
-    boxShadow: '2px 2px 5px rgba(0, 0, 0, 18)'
+    cursor: 'edit',
+    boxShadow: '1px 1px 3px rgba(0, 0, 0, 18)'
   }
 
   return (
