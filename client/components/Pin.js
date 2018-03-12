@@ -24,12 +24,7 @@ export const Pin = (props) => {
     top: `${yPos + 25}px`,
     left: `${xPos - 100}px`,
     zIndex: `${zPos - 1}`,
-    position: 'absolute',
     backgroundColor: `${noteColor}`,
-    padding: '1rem',
-    width: '240px',
-    cursor: 'edit',
-    boxShadow: '1px 1px 3px rgba(0, 0, 0, 18)'
   }
 
   return (
@@ -44,6 +39,7 @@ export const Pin = (props) => {
       {
         activePin.id === pin.id && isEditing ? <EditNote note={note} noteStyle={noteStyle} /> : (
           <div
+            className="pin-note"
             onClick={() => {handleStartEdit(pin)}}
             style={noteStyle}
             dangerouslySetInnerHTML={createMarkup(note)} // eslint-disable-line
