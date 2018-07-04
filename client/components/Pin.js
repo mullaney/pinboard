@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { startDrag, endDrag, startEditMode } from '../store'
 import { markdown } from 'markdown'
 import { EditNote } from './'
+// import './Pin.css'
 
 export const Pin = (props) => {
   const { pin, activePin, handleMouseDown, handleMouseUp, createMarkup, handleStartEdit, isEditing } = props
@@ -25,6 +26,7 @@ export const Pin = (props) => {
     left: `${xPos - 100}px`,
     zIndex: `${zPos - 1}`,
     backgroundColor: `${noteColor}`,
+    border: `1px black solid`,
   }
 
   return (
@@ -39,7 +41,7 @@ export const Pin = (props) => {
       {
         activePin.id === pin.id && isEditing ? <EditNote note={note} noteStyle={noteStyle} /> : (
           <div
-            className="pin-note"
+            className="pin-note pin-test"
             onClick={() => {handleStartEdit(pin)}}
             style={noteStyle}
             dangerouslySetInnerHTML={createMarkup(note)} // eslint-disable-line
