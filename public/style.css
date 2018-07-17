@@ -125,3 +125,29 @@ h1.board-name img {
   max-height: 360px;
   overflow: hidden;
 }
+
+.pinboard-list {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 2rem 0;
+  -webkit-padding-start: 0;
+}
+
+.pinboard-list li {
+  height: 150px;
+  width: 200px;
+  text-align: center;
+  background: url('/img/cork.png');
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-shadow: 1px 1px 5px black;
+  padding: 2rem;
+  margin: 1rem;
+}
+
+.pinboard-list a {
+  color: white;
+}
