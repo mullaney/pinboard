@@ -2,19 +2,23 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { Thumbnail } from './'
 
 export const Boards = (props) => {
   const { boards } = props
 
   return (
     <div className="container">
-      <h1>My Boards</h1>
-      <ul>
+      <h1>pinboard</h1>
+      <p>Choose one of the boards below:</p>
+      <ul className="pinboard-list">
         {boards.map(board => {
           return (
-            <NavLink key={`board-${board.id}`} to={`/boards/${board.id}`}>
-              <li>{board.title}</li>
-            </NavLink>
+            <li key={`board-${board.id}`}>
+              <NavLink to={`/boards/${board.id}`}>
+                <Thumbnail title={board.title} />
+              </NavLink>
+            </li>
           )
         })}
       </ul>
